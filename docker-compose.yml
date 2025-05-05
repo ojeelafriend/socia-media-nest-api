@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_sm
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./sm-data:/var/lib/postgresql/data
+    restart: always
+  pgAdmin:
+    image: dpage/pgadmin4:9.3.0
+    container_name: pgAdmin_sm
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${DATABASE_PASSWORD}
+      PGADMIN_LISTEN_PORT: 8080
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+# networks:
+#   pg-network:
+#     driver: bridge
+
+# volumes:
+#   sm-data:
+#     driver: local
+#   pgadmin-data:
+#     driver: local
