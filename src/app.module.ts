@@ -18,7 +18,7 @@ import { User } from './users/entities/user.entity';
       password: `${process.env.DATABASE_PASSWORD}`,
       database: `${process.env.DATABASE_NAME}`,
       url: `${process.env.DATABASE_URL}`,
-      entities: [Post, User],
+      entities: [User, Post],
       synchronize: true,
     }),
     PostsModule,

@@ -16,7 +16,11 @@ export class PostsService {
     const { content, authorId, writtenByAI } = createPostDto;
 
     try {
-      this.postRepository.save({ content, userId: authorId, writtenByAI });
+      await this.postRepository.save({
+        content,
+        userId: authorId,
+        writtenByAI,
+      });
       return { ok: true, content };
     } catch (err) {
       console.log(err);
