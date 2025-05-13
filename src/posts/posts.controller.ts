@@ -8,11 +8,13 @@ import {
   Delete,
   Res,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Response } from 'express';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Controller('posts')
 export class PostsController {
@@ -58,6 +60,7 @@ export class PostsController {
     return response.status(200).json({ ok, posts });
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':postId')
   update(
     @Param('postId') postId: string,
